@@ -1,4 +1,4 @@
-from src.ports.repositories import IRepository
+from src.ports.repositories.base import IRepository
 from src.domain.models import User
 
 

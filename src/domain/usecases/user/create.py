@@ -1,7 +1,5 @@
-from uuid import UUID
-
 from src.domain.models import User
-from src.ports.repositories import IUserRepository
+from src.ports.repositories.user import IUserRepository
 
 
 class CreateUserUseCase:
@@ -10,5 +8,5 @@ class CreateUserUseCase:
     def __init__(self, user_repository: IUserRepository) -> None:
         self._user_repository = user_repository
 
-    async def execute(self, user: User) -> UUID:
+    async def execute(self, user: User) -> User:
         return await self._user_repository.create(user)
