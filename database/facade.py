@@ -1,21 +1,20 @@
 from typing import Generator
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, Engine
 from sqlalchemy.orm import Session, sessionmaker, declarative_base
+from ioc.options import Options
 
-DATABASE_URL = "sqlite:///./test.db"
-
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-base = declarative_base()
 
 class DatabaseFacade:
+    base = declarative_base()
+    _engine: Engine
 
-    def __init__(self) -> None:
-        """Cria as tabelas no banco, caso ainda não existam"""
-        base.metadata.create_all(bind=engine)
+    def __init__(self, options: Options) -> None:
+        self._engine = create_engine(options.DATABASE_URL, connect_args={"check_same_thread": False})
+        self.base.metadata.create_all(bind=self._engine)
 
     def get_db(self) -> Generator[Session]:
-        session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+        session_local = sessionmaker(autocommit=False, autoflush=False, bind=self._engine)
         db = session_local()
         try:
             yield db

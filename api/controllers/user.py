@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 
 from api.requests.user.create import CreateUserRequest
-from di import injector
+from ioc.di import injector
 from domain.models.user import User
 from domain.usecases.user.create import CreateUserUseCase
 
