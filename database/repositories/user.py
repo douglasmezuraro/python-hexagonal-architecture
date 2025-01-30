@@ -13,11 +13,11 @@ class UserRepository(IUserRepository):
         self._database_facade = database_facade
 
     async def create(self, model: User) -> User:
-        user = UserDB()
-        user.id = uuid4()
-        user.first_name = model.first_name
-        user.last_name = model.last_name
-        user.birthday = model.birthday
+        user = UserDB(
+            id=uuid4(),
+            first_name=model.first_name,
+            last_name=model.last_name,
+            birthday=model.birthday)
 
         db = next(self._database_facade.get_db())
         db.add(user)
