@@ -1,6 +1,6 @@
 from uuid import UUID, uuid4
 
-from domain.models import User
+from domain.models.user import User
 from ports.repositories.user import IUserRepository
 from database.facade import DatabaseFacade
 from database.models.user import UserDB

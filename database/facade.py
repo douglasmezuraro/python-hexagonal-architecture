@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session, sessionmaker, declarative_base
 DATABASE_URL = "sqlite:///./test.db"
 
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
-session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 base = declarative_base()
 
 class DatabaseFacade:
@@ -16,7 +15,7 @@ class DatabaseFacade:
         base.metadata.create_all(bind=engine)
 
     def get_db(self) -> Generator[Session]:
-        """Gerencia sessões do banco"""
+        session_local = sessionmaker(autocommit=False, autoflush=False, bind=engine)
         db = session_local()
         try:
             yield db
