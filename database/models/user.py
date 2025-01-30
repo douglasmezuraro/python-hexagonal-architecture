@@ -1,5 +1,5 @@
 from sqlalchemy import Column, DateTime, String, UUID
-from src.database.facade import base, engine
+from database.facade import base, engine
 
 class UserDB(base):
     __tablename__ = 'users'

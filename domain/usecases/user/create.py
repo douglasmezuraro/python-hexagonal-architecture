@@ -1,5 +1,5 @@
-from src.domain.models import User
-from src.ports.repositories.user import IUserRepository
+from domain.models.user import User
+from ports.repositories.user import IUserRepository
 
 
 class CreateUserUseCase:

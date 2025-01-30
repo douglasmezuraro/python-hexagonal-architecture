@@ -1,10 +1,11 @@
 from injector import Module, provider, singleton
 
-from src.database.facade import DatabaseFacade
-from src.database.repositories.user import UserRepository
-from src.domain.usecases.user.create import CreateUserUseCase
+from database.facade import DatabaseFacade
+from database.repositories.user import UserRepository
+from domain.usecases.user.create import CreateUserUseCase
 
 class AppModule(Module):
+
     @singleton
     @provider
     def provide_database_facade(self) -> DatabaseFacade:

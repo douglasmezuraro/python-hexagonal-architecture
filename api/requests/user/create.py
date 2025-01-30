@@ -3,7 +3,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from src.domain.models.user import User
+from domain.models.user import User
 
 
 class CreateUserRequest(BaseModel):

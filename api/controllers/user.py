@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from injector import Injector
 
-from src.api.requests.user.create import CreateUserRequest
-from src.di import AppModule
-from src.domain.models import User
-from src.domain.usecases.user import CreateUserUseCase
+from api.requests.user.create import CreateUserRequest
+from di import AppModule
+from domain.models import User
+from domain.usecases.user import CreateUserUseCase
 
 router = APIRouter(prefix="/users", tags=["Users"])
 injector = Injector([AppModule])

@@ -1,9 +1,9 @@
 from uuid import UUID, uuid4
 
-from src.domain.models import User
-from src.ports.repositories.user import IUserRepository
-from src.database.facade import DatabaseFacade
-from src.database.models.user import UserDB
+from domain.models import User
+from ports.repositories.user import IUserRepository
+from database.facade import DatabaseFacade
+from database.models.user import UserDB
 
 
 class UserRepository(IUserRepository):
