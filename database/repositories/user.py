@@ -1,0 +1,36 @@
+from uuid import UUID, uuid4
+
+from domain.models.user import User
+from ports.repositories.user import IUserRepository
+from database.facade import DatabaseFacade
+from database.models.user import UserDB
+
+
+class UserRepository(IUserRepository):
+    _database_facade: DatabaseFacade
+
+    def __init__(self, database_facade: DatabaseFacade) -> None:
+        self._database_facade = database_facade
+
+    async def create(self, model: User) -> User:
+        user = UserDB(
+            id=uuid4(),
+            first_name=model.first_name,
+            last_name=model.last_name,
+            birthday=model.birthday)
+
+        db = next(self._database_facade.get_db())
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+        return User.model_validate(user, from_attributes=True)
+
+    async def retrieve(self, id: UUID) -> User:
+        raise NotImplementedError()
+
+    async def update(self, model: User) -> User:
+        raise NotImplementedError()
+
+    async def delete(self, id: UUID) -> None:
+        raise NotImplementedError()
